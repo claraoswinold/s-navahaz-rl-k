@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sınav Hazırlık</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Sınav Hazırlık Uygulaması</h1>
+        <p>YKS, KPSS, DGS, ALES, MSÜ için sınav hazırlık içerikleri.</p>
+    </header>
+
+    <section class="exam-options">
+        <h2>Sınav Seçenekleri</h2>
+        <div class="exam-card">
+            <h3>KPSS</h3>
+            <p>Türkçe, Matematik, Coğrafya, Tarih ve daha fazlası...</p>
+            <button onclick="goToExam('kpss')">Ödeme Yap ve Başla</button>
+        </div>
+        <div class="exam-card">
+            <h3>DGS</h3>
+            <p>Türkçe, Matematik ve Deneme Soruları...</p>
+            <button onclick="goToExam('dgs')">Ödeme Yap ve Başla</button>
+        </div>
+        <div class="exam-card">
+            <h3>ALES</h3>
+            <p>Türkçe, Matematik ve Deneme Soruları...</p>
+            <button onclick="goToExam('ales')">Ödeme Yap ve Başla</button>
+        </div>
+        <div class="exam-card">
+            <h3>YKS</h3>
+            <p>Matematik, Fen Bilgisi, Türkçe ve daha fazlası...</p>
+            <button onclick="goToExam('yks')">Ödeme Yap ve Başla</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Sınav Hazırlık Uygulaması. Tüm hakları saklıdır.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
