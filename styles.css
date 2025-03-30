@@ -1,13 +1,8 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
 }
 
 header {
@@ -17,48 +12,35 @@ header {
     padding: 20px;
 }
 
-h1 {
-    font-size: 2.5rem;
-}
-
-.exam-options {
-    display: flex;
-    justify-content: space-around;
+.exams {
     margin: 20px;
 }
 
-.exam-card {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 200px;
+h2 {
     text-align: center;
-    transition: transform 0.3s;
 }
 
-.exam-card:hover {
-    transform: translateY(-10px);
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: white;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 button {
     background-color: #4CAF50;
     color: white;
-    padding: 10px;
     border: none;
-    border-radius: 5px;
+    padding: 10px 20px;
     cursor: pointer;
-    margin-top: 15px;
 }
 
 button:hover {
     background-color: #45a049;
-}
-
-footer {
-    text-align: center;
-    margin-top: 30px;
-    padding: 10px;
-    background-color: #333;
-    color: white;
 }
