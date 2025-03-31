@@ -306,14 +306,9 @@
       }
     }
 
-    // Ödeme sürecini simüle eden fonksiyon (gerçek entegrasyonda backend çağrısı yapılacak)
-    function processPayment() {
-      paid = true;
-      document.getElementById('payment-message').classList.remove('hidden');
-      setTimeout(() => {
-        showPage(selectedExam);
-      }, 2000);
-    }
+    function startPayment() {
+    window.location.href = "paytr_payment.php";
+}
 
 
     // PDF içeriğini gösteren fonksiyon
