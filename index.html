@@ -1,36 +1,349 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exam Preparation</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tilki Taktikleri</title>
+  <style>
+    /* Genel ayarlar */
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(90deg, #39ecc0, #f349c8);
+      padding: 20px;
+      text-align: center;
+      color: white;
+      font-size: 1.5em;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+    .header-img {
+      position: absolute;
+      top: 110px;
+      right: 25px;
+      width: 120px;
+      height: auto;
+    }
+    .speech-bubble {
+      position: absolute;
+      right: 150px;
+      top: 100px;
+      width: 200px;
+      padding: 10px;
+      background-color: rgba(244, 182, 223, 0.8);
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      font-size: 1em;
+      color: #333;
+    }
+    .container {
+      padding: 20px;
+      margin-bottom: 70px;
+    }
+    .card {
+      background-color: white;
+      margin: 10px 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+    }
+    .card h2 {
+      margin-top: 0;
+    }
+    .btn {
+      border: none;
+      padding: 10px 15px;
+      color: white;
+      border-radius: 4px;
+      font-size: 1em;
+      cursor: pointer;
+      margin: 5px 0;
+      display: inline-block;
+    }
+    .btn-yks { background-color: #70AEF6; }
+    .btn-kpss { background-color: #67F5D5; }
+    .btn-dgs { background-color: #F5A5E1; }
+    .btn-ales { background-color: #F8697C; }
+    .btn-topic-yks { background-color: #70AEF6; }
+    .btn-topic-kpss { background-color: #67F5D5; }
+    .btn-topic-dgs { background-color: #F5A5E1; }
+    .btn-topic-ales { background-color: #F8697C; }
+    .btn-back { background-color: #f1c40f; }
+    .btn-payment { background-color: #f80a0a; }
+    .hidden { display: none; }
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #333;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+    }
+    .bottom-nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1em;
+      flex: 1;
+      text-align: center;
+    }
+    /* Dinamik butonlar için stiller */
+    #action-button-container {
+      display: flex;
+      gap: 5px; /* Butonlar arası boşluk */
+    }
+    #action-buttons-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Sınav Hazırlık</h1>
-    </header>
-    <section class="exams">
-        <h2>Mevcut Sınavlar</h2>
-        <ul>
-            <li>
-                <h3>KPSS</h3>
-                <button>Ödeme Yap</button>
-            </li>
-            <li>
-                <h3>DGS</h3>
-                <button>Ödeme Yap</button>
-            </li>
-            <li>
-                <h3>YKS</h3>
-                <button>Ödeme Yap</button>
-            </li>
-            <li>
-                <h3>ALES</h3>
-                <button>Ödeme Yap</button>
-            </li>
-        </ul>
-    </section>
-    <script src="script.js"></script>
+  <header>
+    HEDEF KAZAN
+    <img src="maskot.png" alt="Logo" class="header-img" />
+    <div class="speech-bubble" id="speech-bubble">
+      Sınav hazırlık yolculuğuna başlamak için tıklayın!
+    </div>
+  </header>
+
+  <div class="container" id="main-container">
+    <!-- Ana Sayfa: Sınav Seçimi -->
+    <div id="exam-selection" class="card">
+      <h2>Sınav Türünü Seçin</h2>
+      <button class="btn btn-yks" onclick="selectExam('yks')">YKS</button>
+      <button class="btn btn-kpss" onclick="selectExam('kpss')">KPSS</button>
+      <button class="btn btn-dgs" onclick="selectExam('dgs')">DGS</button>
+      <button class="btn btn-ales" onclick="selectExam('ales')">ALES</button>
+    </div>
+
+    <!-- YKS Altında TYT ve AYT Butonları -->
+    <div id="yks" class="card hidden">
+      <h2>YKS</h2>
+      <button class="btn btn-topic-yks" onclick="showYks('tyt')">TYT</button>
+      <button class="btn btn-topic-yks" onclick="showYks('ayt')">AYT</button>
+      <button class="btn btn-back" onclick="goBack()">Geri</button>
+    </div>
+
+    <!-- TYT Dersleri -->
+    <div id="tyt" class="card hidden">
+      <h2>TYT Dersleri</h2>
+      <button class="btn btn-topic-yks" onclick="showTopic('Türkçe'); changeSpeechBubble('Türkçe dersi seçildi')">Türkçe</button>
+      <button class="btn btn-topic-yks" onclick="showTopic('Matematik'); changeSpeechBubble('Matematik dersi seçildi')">Matematik</button>
+      <button class="btn btn-topic-yks" onclick="showTopic('Fizik'); changeSpeechBubble('Fizik dersi seçildi')">Fizik</button>
+      <button class="btn btn-topic-yks" onclick="showTopic('Kimya'); changeSpeechBubble('Kimya dersi seçildi')">Kimya</button>
+      <button class="btn btn-topic-yks" onclick="showTopic('Biyoloji'); changeSpeechBubble('Biyoloji dersi seçildi')">Biyoloji</button>
+      <button class="btn btn-topic-yks" onclick="showTopic('Tarih'); changeSpeechBubble('Tarih dersi seçildi')">Tarih</button>
+      <button class="btn btn-topic-yks" onclick="showTopic('Coğrafya'); changeSpeechBubble('Coğrafya dersi seçildi')">Coğrafya</button>
+      <button class="btn btn-topic-yks" onclick="showTopic('Felsefe'); changeSpeechBubble('Felsefe dersi seçildi')">Felsefe</button>
+      <button class="btn btn-topic-yks" onclick="showTopic('Din Kültürü'); changeSpeechBubble('Din Kültürü dersi seçildi')">Din Kültürü</button>
+      <button class="btn btn-back" onclick="goBack()">Geri</button>
+    </div>
+
+     <!-- AYT Dersleri -->
+     <div id="ayt" class="card hidden">
+      <h2>AYT Dersleri</h2>
+      <button class="btn btn-topic-yks" onclick="showTopic('Matematik2')">Matematik</button>
+      <button class="btn btn-topic-yks" onclick="showTopic('Fizik2')">Fizik</button>
+      <button class="btn btn-topic-yks" onclick="showTopic('Kimya2')">Kimya</button>
+      <button class="btn btn-topic-yks" onclick="showTopic('Biyoloji2')">Biyoloji</button>
+      <button class="btn btn-topic-yks" onclick="showTopic('Edebiyat')">Edebiyat</button>
+      <button class="btn btn-topic-yks" onclick="showTopic('Tarih2')">Tarih</button>
+      <button class="btn btn-topic-yks" onclick="showTopic('Coğrafya2')">Coğrafya</button>
+      <button class="btn btn-topic-yks" onclick="showTopic('Yabancı Dil')">Yabancı Dil</button>
+      <button class="btn btn-back" onclick="goBack()">Geri</button>
+  </div>
+
+
+  <!-- KPSS Dersleri -->
+  <div id="kpss" class="card hidden">
+      <h2>KPSS Dersleri</h2>
+      <button class="btn btn-topic-kpss" onclick="showTopic('Türkçe'); changeSpeechBubble('Şimdi önce dersimizin konu anlatımını baştan sona okuyup notlarımızı alalım!')">Türkçe</button>
+      <button class="btn btn-topic-kpss" onclick="showTopic('Matematik');changeSpeechBubble('Tek bir konuyu güzelce çalış sonra soru çöz!')">Matematik</button>
+      <button class="btn btn-topic-kpss" onclick="showTopic('Tarih'); changeSpeechBubble('Şimdi önce dersimizin konu anlatımını baştan sona okuyup notlarımızı alalım!')">Tarih</button>
+      <button class="btn btn-topic-kpss" onclick="showTopic('Coğrafya'); changeSpeechBubble('Şimdi önce dersimizin konu anlatımını baştan sona okuyup notlarımızı alalım!')">Coğrafya</button>
+      <button class="btn btn-topic-kpss" onclick="showTopic('Vatandaşlık'); changeSpeechBubble('Şimdi önce dersimizin konu anlatımını baştan sona okuyup notlarımızı alalım!')">Vatandaşlık</button>
+      <button class="btn btn-topic-kpss" onclick="showTopic('Güncel Bilgiler'); changeSpeechBubble('Sadece bol bol okuyalım!')">Güncel Bilgiler</button>
+      <button class="btn btn-topic-kpss" onclick="showTopic('Eğitim Bilimleri')">Eğitim Bilimleri</button>
+
+  </div>
+
+  <!-- DGS Dersleri -->
+  <div id="dgs" class="card hidden">
+      <h2>DGS Dersleri</h2>
+      <button class="btn btn-topic-dgs" onclick="showTopic('Türkçe'); changeSpeechBubble('Şimdi önce dersimizin konu anlatımını baştan sona okuyup notlarımızı alalım!')">Türkçe</button>
+      <button class="btn btn-topic-dgs" onclick="showTopic('Matematik');changeSpeechBubble('Tek bir konuyu güzelce çalış sonra soru çöz!')">Matematik</button>
+
+  </div>
+
+  <!-- ALES Dersleri -->
+  <div id="ales" class="card hidden">
+      <h2>ALES Dersleri</h2>
+      <button class="btn btn-topic-ales" onclick="showTopic('Türkçe'); changeSpeechBubble('Şimdi önce dersimizin konu anlatımını baştan sona okuyup notlarımızı alalım!')">Türkçe</button>
+      <button class="btn btn-topic-ales" onclick="showTopic('Matematik');changeSpeechBubble('Tek bir konuyu güzelce çalış sonra soru çöz!')">Matematik</button>
+
+  </div>
+    <!-- Ders İçeriği (Dinamik buton ekleme bölümü) -->
+    <div id="topic-content" class="card hidden">
+      <h2 id="topic-name">Ders Adı</h2>
+      <div id="action-buttons-wrapper">
+        <div id="action-button-container"></div>
+        <button class="btn btn-back" onclick="goBack()">Geri</button>
+      </div>
+    </div>
+    
+    <!-- PDF İçeriği (Konu Anlatımı) -->
+    <div id="pdf-content" class="card hidden">
+      <h2>Konu Anlatımı</h2>
+      <object id="pdfObject" data="" type="application/pdf" width="100%" height="600px">
+        <p>PDF görüntülenemiyor. Lütfen PDF dosyasını indirin.</p>
+      </object>
+      <button class="btn btn-back" onclick="goBack()">Geri</button>
+    </div>
+    
+    <!-- Ödeme Sayfası -->
+    <div id="payment" class="card hidden">
+      <h2>Ödeme Yap</h2>
+      <p>Ödeme için aşağıdaki butonlardan birine tıklayın:</p>
+      <button class="btn btn-payment" onclick="processPayment()">Ödemeyi Tamamla</button>
+      <button class="btn btn-back" onclick="goBack()">Geri</button>
+    </div>
+  </div>
+
+  <script>
+    let currentPage = null;
+    let pageHistory = [];
+    let selectedExam = '';
+    let selectedSubject = '';
+
+    function hideAll() {
+      document.querySelectorAll('.card').forEach(card => card.classList.add('hidden'));
+    }
+
+    function showPage(pageId, pushHistory = true) {
+      if (pushHistory && currentPage) {
+        pageHistory.push(currentPage);
+      }
+      hideAll();
+      document.getElementById(pageId).classList.remove('hidden');
+      currentPage = pageId;
+    }
+
+    function showExams() {
+      showPage('exam-selection');
+    }
+
+    function selectExam(exam) {
+      selectedExam = exam;
+      showPage('payment');
+    }
+
+    function showYks(examType) {
+      if (examType === 'tyt') {
+        showPage('tyt');
+      } else {
+        showPage('ayt');
+      }
+    }
+
+    // Konuşma baloncuğunu güncelleyen fonksiyon
+    function changeSpeechBubble(text) {
+      document.getElementById("speech-bubble").innerText = text;
+    }
+
+    // PDF içeriğini gösterip, pdf linkini ve konuşma balonu mesajını güncelleyen fonksiyon
+    function showPDFwithSource(source, speechText) {
+      const pdfObject = document.getElementById("pdfObject");
+      if (pdfObject) {
+        // Zaman damgası ekleyerek önbellekleme sorununu aşalım
+        pdfObject.setAttribute("data", source + "?t=" + new Date().getTime());
+      }
+      changeSpeechBubble(speechText);
+      showPage('pdf-content');
+    }
+
+    function showTopic(subject) {
+      selectedSubject = subject;
+      document.getElementById('topic-name').innerText = subject;
+      const actionContainer = document.getElementById('action-button-container');
+      actionContainer.innerHTML = ""; // Önceki butonları temizle
+
+      if (subject === "Türkçe") {
+        // "Konu" butonu için: Türkçe konu anlatımı PDF'si
+        const konuBtn = document.createElement("button");
+        konuBtn.className = "btn btn-topic-yks";
+        konuBtn.innerText = "Konu";
+        konuBtn.onclick = function() {
+          showPDFwithSource("ders.pdf", "Türkçe konu anlatımı başlıyor...");
+        };
+        actionContainer.appendChild(konuBtn);
+
+        // "Soru" butonu için: Türkçe soru çözümü PDF'si
+        const soruBtn = document.createElement("button");
+        soruBtn.className = "btn btn-topic-yks";
+        soruBtn.innerText = "Soru";
+        soruBtn.onclick = function() {
+          showPDFwithSource("java.pdf", "Türkçe soru çözümü başlıyor...");
+        };
+        actionContainer.appendChild(soruBtn);
+
+        // "Deneme" butonu için: Türkçe deneme sınavı PDF'si
+        const denemeBtn = document.createElement("button");
+        denemeBtn.className = "btn btn-topic-yks";
+        denemeBtn.innerText = "Deneme";
+        denemeBtn.onclick = function() {
+          showPDFwithSource("turkce_deneme.pdf", "Türkçe deneme sınavı başlıyor...");
+        };
+        actionContainer.appendChild(denemeBtn);
+      } else if (subject === "Matematik") {
+        const btn = document.createElement("button");
+        btn.className = "btn btn-topic-yks";
+        btn.innerText = "Soru";
+        btn.onclick = function() {
+          showPDFwithSource("matematik_soru.pdf", "Matematik soru çözümü başlıyor...");
+        };
+        actionContainer.appendChild(btn);
+      } else if (subject === "Fizik") {
+        const btn = document.createElement("button");
+        btn.className = "btn btn-topic-yks";
+        btn.innerText = "Deneme";
+        btn.onclick = function() {
+          showPDFwithSource("fizik_deneme.pdf", "Fizik deneme sınavı başlıyor...");
+        };
+        actionContainer.appendChild(btn);
+      } else {
+        const btn = document.createElement("button");
+        btn.className = "btn btn-topic-yks";
+        btn.innerText = "Konu";
+        btn.onclick = function() {
+          showPDFwithSource(subject.toLowerCase() + "_konu.pdf", subject + " konu anlatımı başlıyor...");
+        };
+        actionContainer.appendChild(btn);
+      }
+      showPage('topic-content');
+    }
+
+    function goBack() {
+      if (pageHistory.length > 0) {
+        let previousPage = pageHistory.pop();
+        showPage(previousPage, false);
+      }
+    }
+
+    function processPayment() {
+      changeSpeechBubble('Aramıza katılğınız için teşekkürler :)');
+      if (selectedExam) {
+        showPage(selectedExam);
+      }
+    }
+
+    window.onload = showExams;
+  </script>
 </body>
 </html>
